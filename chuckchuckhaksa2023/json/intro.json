@@ -1,0 +1,38 @@
+[
+	
+	{ 
+		
+		"image":"image/대화창_양갱.png",
+		"content":"대사창1"
+	},
+	{ 
+		
+		"image":"image/대화창_양갱.png",
+		"content":"대사창2"
+	},
+	{ 
+		
+		"image":"image/대화창_교수.png",
+		"content":"대사창3"
+	},
+	{ 
+		
+		"image":"image/대화창_양갱.png",
+		"content":"대사창4"
+	},
+	{ 
+		
+		"image":"image/대화창_교수.png",
+		"content":"대사창5"
+	},
+	{ 
+		
+		"image":"image/대화창_양갱.png",
+		"content":"대사창6"
+	},
+	{ 
+		
+		"image":"image/대화창_교수.png",
+		"content":"대사창7"
+	}
+]
