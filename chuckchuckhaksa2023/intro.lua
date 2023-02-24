@@ -17,17 +17,24 @@ function scene:create( event )
 	--다이얼로그 
 	local dialog = display.newGroup()
 
-	local image = display.newRect(dialog, display.contentWidth*0.5, display.contentHeight*0.75, 1000, 200)
+	local image0 = display.newRect(dialog,display.contentWidth*0.1,display.contentHeight*0.7,200,200)
+	image0:scale(2,2)
+	local image = display.newRect(dialog, display.contentWidth*0.6, display.contentHeight*0.75, 1300, 300)
 	
 
-	local content = display.newText(dialog, "솰라솰라 불라불라", display.contentWidth*0.6, display.contentHeight*0.85, display.contentWidth*0.7, display.contentHeight*0.2)
+	local content = display.newText(dialog, "솰라솰라 불라불라", display.contentWidth*0.8, display.contentHeight*0.85, display.contentWidth*0.7, display.contentHeight*0.2)
 	content:setFillColor(0)
 	content.size = 30
+
+	sceneGroup:insert(dialog)
+	sceneGroup:insert(image0)
+	sceneGroup:insert(image)
+	sceneGroup:insert(content)
 	
 	--json 정보 읽기 
 	local Data = jsonParse( "json/intro.json" )
 	if Data then
-		
+		print(Data[1].image0)
 		print(Data[1].content)
 		print(Data[1].image)
 	end
@@ -41,12 +48,16 @@ function scene:create( event )
 			composer.gotoScene("map") 
 			return
 		end
-
+		image0.fill = {
+			type ="image",
+			filename =Data[index].image0
+		}
 		content.text = Data[index].content
 		image.fill = {
 			type = "image",
 			filename = Data[index].image
 		}
+
 	end
 	openingbg:addEventListener("tap", nextScript)
 

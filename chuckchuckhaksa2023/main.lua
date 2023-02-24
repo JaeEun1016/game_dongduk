@@ -39,7 +39,7 @@ local function onSecondView( event )
 	composer.gotoScene( "intro" )
 end
 local function onThirdView( event )
-	composer.gotoScene( "view2" )
+	composer.gotoScene( "opening" )
 end
 
 

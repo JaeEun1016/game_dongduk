@@ -1,37 +1,37 @@
 [
 	
 	{ 
-		
+		"image0":"image/고양이앉은모습.png",
 		"image":"image/대화창_양갱.png",
 		"content":"대사창1"
 	},
 	{ 
-		
+		"image0":"image/고양이앉은모습.png",
 		"image":"image/대화창_양갱.png",
 		"content":"대사창2"
 	},
 	{ 
-		
+		"image0":"image/교수캐릭터.png",
 		"image":"image/대화창_교수.png",
 		"content":"대사창3"
 	},
 	{ 
-		
+		"image0":"image/고양이앉은모습.png",
 		"image":"image/대화창_양갱.png",
 		"content":"대사창4"
 	},
 	{ 
-		
+		"image0":"image/교수캐릭터.png",
 		"image":"image/대화창_교수.png",
 		"content":"대사창5"
 	},
 	{ 
-		
+		"image0":"image/고양이앉은모습.png",
 		"image":"image/대화창_양갱.png",
 		"content":"대사창6"
 	},
 	{ 
-		
+		"image0":"image/교수캐릭터.png",
 		"image":"image/대화창_교수.png",
 		"content":"대사창7"
 	}

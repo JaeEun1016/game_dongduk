@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------
 --
--- opening.lua
---
+-- soongin.lua
+--숭인관 내부 맵
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -10,16 +10,16 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	--배경
-	local StartBg = display.newImage("image/게임시작화면.png",1920,1080)
-	StartBg.x, StartBg.y = display.contentWidth*0.5, display.contentHeight*0.5
-	sceneGroup:insert(StartBg)
+	local soonginBg = display.newImage("image/건물내부-01.png",1920,1080)
+	soonginBg.x, soonginBg.y = display.contentWidth*0.5, display.contentHeight*0.5
+	sceneGroup:insert(soonginBg)
 
-	local StartButton = display.newImage("image/시작하기버튼.png",1920,1080)
-	StartButton.x, StartButton.y = display.contentWidth*0.73, display.contentHeight*0.83
-	sceneGroup:insert(StartButton)
-
-	--임시 텍스트 
 	
+	--임시 텍스트 
+	local showText = display.newText("숭인관내부",display.contentWidth*0.5,display.contentHeight*0.8)
+	showText:setFillColor(1)
+	showText.size=200
+	sceneGroup:insert(showText)
 
 	--씬이동 
 	local function catch(event)
@@ -29,11 +29,11 @@ function scene:create( event )
 							effect ="fade",
 							
 						}
-        composer.gotoScene("intro",options)
+        composer.gotoScene("soongin_game",options)
     
     	end
 
-	  StartButton:addEventListener("tap",catch)
+	  soonginBg:addEventListener("tap",catch)
 
 end
 

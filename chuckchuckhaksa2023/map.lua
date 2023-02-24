@@ -13,8 +13,72 @@ function scene:create( event )
 	local mapBG = display.newImage("image/맵_건물이름표.png",1920,1080)
 	mapBG.x, mapBG.y = display.contentWidth*0.5, display.contentHeight*0.5
 	sceneGroup:insert(mapBG)
+	--인문관
+	local inmoon = display.newImage("image/인문관.png",1920,1080)
+	inmoon.x, inmoon.y = display.contentWidth*0.23, display.contentHeight*0.21
+	inmoon:scale(1.3,1.3)
+	sceneGroup:insert(inmoon)
+	--숭인관
+	local soongin = display.newImage("image/숭인관.png",1920,1080)
+	soongin.x, soongin.y = display.contentWidth*0.75, display.contentHeight*0.21
+	soongin:scale(1.3,1.3)
+	sceneGroup:insert(soongin)
+	--본관
+	local bon = display.newImage("image/본관.png",1920,1080)
+	bon.x, bon.y = display.contentWidth*0.25, display.contentHeight*0.68
+	bon:scale(1.3,1.3)
+	sceneGroup:insert(bon)
+	--대학원
+	local won = display.newImage("image/대학원.png",1920,1080)
+	won.x, won.y = display.contentWidth*0.74, display.contentHeight*0.75
+	won:scale(1.2,1.2)
+	sceneGroup:insert(won)
 
-	
+	--탭기능 
+
+	--인문
+	 local function inmoonTap(event)
+			print("인문관탭")
+        local options={
+							effect ="fade",
+							time=400
+						}
+        composer.gotoScene("inmoon",options)
+    end
+	 inmoon:addEventListener("tap",inmoonTap)
+
+	--숭인
+	 local function SoonginTap(event)
+			print("숭인관탭")
+        local options={
+							effect ="fade",
+							time=400
+						}
+        composer.gotoScene("soongin",options)
+    end
+	 soongin:addEventListener("tap",SoonginTap)
+
+	--본관
+	 local function bonTap(event)
+			print("본관탭")
+        local options={
+							effect ="fade",
+							time=400
+						}
+        composer.gotoScene("bon",options)
+    end
+	 bon:addEventListener("tap",bonTap)
+
+	--대학원
+	 local function wonTap(event)
+			print("대학원탭")
+        local options={
+							effect ="fade",
+							time=400
+						}
+        composer.gotoScene("won",options)
+    end
+	 won:addEventListener("tap",wonTap)
 
 	
 end
