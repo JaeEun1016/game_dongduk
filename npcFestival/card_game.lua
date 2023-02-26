@@ -72,12 +72,73 @@ function scene:create( event )
 			cardOpen[i][j].alpha = 0
 		end
 	end
-		
+  
+
+	-- 타이머	
+	local time_bar = display.newImage("image/time 바.png", 1920, 1080)
+	time_bar.x, time_bar.y = display.contentWidth*0.89, display.contentHeight*0.15
+	time_bar:scale(1.8,2)
+	time_bar.alpha = 0
+
+	local time = display.newText(10, display.contentWidth*0.91, display.contentHeight*0.15)
+	time.size = 80
+	time:setFillColor(0)
+	time.alpha = 0
+
+	local score
+	local function counter(event)
+		time.text = time.text - 1
+		if (time.text == '30') then
+			time:setFillColor(1,0,0) -- 빨강
+		end
+
+		if( time.text == '-1') then
+			composer.gotoScene( "F_ending" )
+			time.alpha = 0 
+			--composer.gotoScene( "F_ending" )
+		end
+
+		-- if time.text > 30 then
+		-- 	score = 'A+'
+		-- elseif (time.text <= 30 and time.text > 0) then
+		-- 	score = 'B'
+		-- else 
+		-- 	score = 'F'
+		-- end
+
+	end
+
+	-- local function counter( event )
+	-- 	time.text = time.text - 1
+ 
+	-- 	if( time.text == '30' ) then
+	-- 		time:setFillColor(1, 0, 0)
+	-- 	end
+ 
+	-- 	if( time.text == '-1') then
+	-- 		time.alpha = 0
+ 
+	-- 		if( score.text ~= '성공!' ) then
+	-- 			score.text = '실패!'
+				
+	-- 			for i = 1, 5 do
+	-- 				if (carrot[i]) then
+	-- 					carrot[i]:removeEventListener("touch", dragCarrot)
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
+ 
 
 	-- 게임화면으로 넘어가기 tapskip
 	local function tapskip(event)
 		cardex.alpha = 0
 		skipBu.alpha = 0
+		time_bar.alpha = 1
+		time.alpha = 1
+		local timeAttack = timer.performWithDelay(1000, counter, 11) -- 0 또는 -1 은 무한 반복	 
+
 		timer.performWithDelay(500, function() cardBGroup:toFront() end) -- 전체적으로 보이는 시간
 		for i = 1,4 do
 			for j = 1,4 do
@@ -88,14 +149,6 @@ function scene:create( event )
 	end
 	skipBu:addEventListener("tap", tapskip)
 
-	-- 타이머
-	local count = 1
-	local function counter( event )
-		print(count..'초가 지났습니다')
-		count = count + 1
-	end
-
-	--local timeAttack = timer.performWithDelay(1000, counter, ) -- 0 또는 -1 은 무한 반복	 
 
 	-----------------------------------------------------------------------------------------
 	-- 카드 flip 기능 -----------------------------------------------------------------------
@@ -161,16 +214,6 @@ function scene:create( event )
 	end
 
 
-	-- local function matchSys(idx1, idx2)
-	-- 	if idx1 == -1 or idx2 == -1 then
-	-- 		break
-	-- 	else 
-	-- 		if idx1 == idx2 then
-	-- 			display.remove(cardOpen.index == idx1)
-	-- 		end
-	-- 	end		
-	-- end
-
 	for i = 1,4 do
 		for j = 1,4 do
 			cardBack[i][j]:addEventListener("tap", flip)
@@ -178,179 +221,6 @@ function scene:create( event )
 			cardOpen[i][j]:addEventListener("tap", rotation)
 		end
 	end
-
-
-	-- flip => rotation
-	-- local function flip(card, skipCB)
-	-- 	local onComplete1
-	-- 	local onComplete2
-
-	-- 	onComplete1 = function(self)
-	-- 		self.image.isVisible = not card.image.isVisible
-	-- 		transition.to(card, {xScale = 1, time = 250, onComplete = onComplete2, transition = easing.outCirc})
-	-- 	end
-
-	-- 	onComplete2 = function(self)
-	-- 		self.isFlipping = false
-	-- 		self.isFaceUp = not self.isFaceUp
-	-- 		if (not skipCB) then
-	-- 			post("onFlippedCard", {card = self})
-	-- 		end
-	-- 	end
-
-	-- 	transition.to(card, {xScale = 0.05, time = 250, onComplete = onComplete1, transition = easing.inCirc})
-	-- end
-
--- 	-- createCard
--- 	local function createCard(group, x, y, width, height, num, images ) -- images = folder
--- 		local card = display.newGroup()
--- 		group:insert(card)
-
--- 		card.x = x
--- 		card.y = y
-
--- 		local back = display.newImageRect(card, "image/뒤집힌카드.png", width, height)
--- 		-- width, height 대신 cardBack[i][j]:scale(0.75,0.6)
-		
--- 		local size = (width>height) and height or width
--- 		local image = display.newImageRect(card, "image/card ("..i..").png", width, height)
--- 		image.isVisible = false
-
--- 		card.num = num -- number of the cards
--- 		card.isFlipping = false 
--- 		card.isFaceUp = false -- image visible
--- 		card.back = back
--- 		card.image = image
-
--- 		card.flip = flip -- 1 of 3 flipping function
-		
--- 		-- touch handler: return true -> pause / return false -> continue pocessing
--- 		back.touch = function(self, event)
--- 			if (card.isFlipping) then return true end
--- 			if (card.isFaceUp) then return true end
-
--- 			if (event.phase == "ended" or event.phase == "cancelled") then
--- 				card.isFlipping = true
--- 				card:flip() -- flip3 function 
--- 				-- = card.flip(card)
--- 				post("onSFX", {sfx = "click"}) -- post event (haven't discuss yet)
--- 			end
--- 			return true
--- 		end
--- 		back:addEventListener("touch")
-
--- 		return card
--- 	end
-
-	
--- -- Variables
--- local layers
--- local cards = {}
-
--- local duration = 60
-
--- local rows = 4 
--- local cols = 4 
-
--- local cardWidth 	= w/cols
--- local cardHeight 	= cardWidth
-
--- local flipCount = 0
--- local currentCards = {}
-
--- -- Draw Board
--- --
--- function public.drawBoard()
--- 	-- Calculate the position of the first card (upper-left)
--- 	--
-
--- 	local startX = centerX - (cols * cardWidth)/2 + cardWidth/2
--- 	local startY = centerY - (rows * cardHeight)/2 + cardHeight/2  + 20
-
--- 	-- Generate a list of card numbers then 'shuffle' it
--- 	local count = 1
--- 	local cardNumbers = {}	
--- 	for i = 1, (rows * cols)/2 do		
--- 		cardNumbers[#cardNumbers+1] = count
--- 		cardNumbers[#cardNumbers+1] = count
--- 		count = count + 1
--- 	end
-
--- 	-- Randomize (shuffle) the numbers list
--- 	--
--- 	table.shuffle( cardNumbers, 100 )
-	
--- 	-- Create and lay out the cards 
--- 	--
--- 	local count = 1
--- 	for i = 1, cols do
--- 		for j = 1, rows do				
--- 			local card = createCard( layers.content, 
--- 				                       startX + (i-1) * cardWidth, 
--- 						               startY + (j-1) * cardHeight, 
--- 				                       cardWidth - 6, cardHeight - 6, 
--- 				                       cardNumbers[count],
--- 				                       images )
--- 			cards[card] = card	
--- 			count = count+1
--- 		end
--- 	end
-
--- 	post("onStartTimer", { duration = 60 } )
--- end
--- 	-- Listen For Card Flips - onFlippedCard()
--- 	function public.onFlippedCard(event)	
--- 		flipCount = flipCount + 1
--- 		currentCards[flipCount] = event.card
-
--- 		if( flipCount > 1 ) then
--- 			-- Same image?
--- 			--
--- 			if( currentCards[1].num == currentCards[2].num ) then
--- 				-- Yes!
--- 				--
--- 				transition.to( currentCards[1], { xScale = 0.05, yScale = 0.05, alpha = 0,
--- 																				time = 250, delay = 500, onComplete = display.remove } )
--- 				transition.to( currentCards[2], { xScale = 0.05, yScale = 0.05, alpha = 0,
--- 																				time = 250, delay = 500, onComplete = display.remove } )
-
--- 				-- Remove cards from our tracking list
--- 				--
--- 				cards[currentCards[1]] = nil
--- 				cards[currentCards[2]] = nil
-
--- 				post("onScore")
-
--- 				if( table.count(cards) == 0 ) then
--- 					post("onGameOver")
--- 				end
--- 				post( "onSFX", { sfx = "match" } )
--- 			else
--- 				-- Nope.
--- 				--
--- 				local card1 = currentCards[1]
--- 				local card2 = currentCards[2]
-
--- 				timer.performWithDelay( 500, 
--- 					function()
--- 						-- Since we waited, do simple check to be sure
--- 						-- the objects are still valid (not already removed).
--- 						--
--- 						if( not card1 or card1.removeSelf == nil or
--- 								not card2 or card2.removeSelf == nil ) then 
--- 								print("One of the cards was removed before it was time to flip.")
--- 								return
--- 						end
-
--- 						card1:flip(true)
--- 						card2:flip(true)					
--- 					end )
--- 			end
--- 			currentCards = {}
--- 			flipCount = 0
--- 		end	
--- 	end
--- 	listen( "onFlippedCard", public.onFlippedCard )
 
 end
 
@@ -378,6 +248,7 @@ function scene:hide( event )
 		--
 		-- INSERT code here to pause the scene
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
+		-- 추가 (다시하기 만들때) composer.removeScene('card_game') 
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
 	end
