@@ -18,6 +18,7 @@ function scene:create( event )
 	
 	local button1 = display.newImage("image/button_1.png",display.contentWidth,display.contentHeight)
  	button1.x, button1.y = display.contentWidth*0.9, display.contentHeight*0.9
+	button1:toFront()
 	sceneGroup:insert(button1)
 
 		--æ¿¿Ãµø 
