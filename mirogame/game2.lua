@@ -16,9 +16,6 @@ function scene:create( event )
 	local miro = display.newImage("image/final_miro.png",display.contentWidth,display.contentHeight)
  	miro.x, miro.y = display.contentWidth*0.5, display.contentHeight*0.5
 
-	local cat = display.newImageRect("image/cat_left.png", 170, 170)
-	cat.x, cat.y = display.contentWidth*0.7, display.contentHeight*0.23
-
 	physics.start()
 	physics.setDrawMode("hybrid")
 
@@ -34,33 +31,68 @@ function scene:create( event )
 	arrow[2].name = "right"
 	arrow[2]:toFront()
 
-	arrow[3] = "right"
+	arrow[3]= display.newImage("image/arrow_up.png",70,100)--위쪽 이동
+	arrow[3].x,arrow[3].y=1770,500
+	arrow[3].name="up"
 
-	function arrowTab(event)
-		x = cat.x
-		y = cat.y
 
-		if(event.target.name == arrow[3]) then
-			if(event.target.name == "left") then
-				transition.to(cat,{time=100, x=(x-50)})
-			else
-				transition.to(cat,{time=100, x=(x+50)})
-			end
-		else
-			arrow[3] = event.target.newImage
+	arrow[4]= display.newImage("image/arrow_down.png",70,100)--아래쪽 이동
+	arrow[4].x,arrow[4].y=1770,1000
+	arrow[4].name="down"
 
-			if(event.target.name == "left") then
-				transition.to(cat,{time=100, x=(x-50)})
-			else
-				transition.to(cat,{time=100, x=(x+50)})
-			end
-		end
-	end
 
-	for i = 1, 2 do --tap하면 움직임
-		arrow[i]:addEventListener("tap", arrowTab)
-		sceneGroup:insert(arrow[i])
-	end
+	arrow[5] = "right" --방향정보
+
+	local imgSheet = graphics.newImageSheet( "image/player/ch_frame.png", 
+    { width = 3200/8, height = 400, numFrames = 8 })
+   local sequencesData = {
+    { name = "down",   frames = {1,2 }, time = 500 },
+    { name = "left",     frames = { 3,4}, time = 500 },
+    { name = "right",    frames = { 5,6 }, time = 500 },
+    { name = "up",    frames = { 7,8 }, time = 500 }
+}
+
+   local cat = display.newSprite(imgSheet, sequencesData)
+   cat:scale(0.5,0.5)
+   cat.x,cat.y=display.contentWidth*0.73, display.contentHeight*0.23
+
+   function arrowTab( event )
+      x = cat.x
+      y = cat.y
+      
+         if (event.target.name == arrow[1].name ) then
+               
+               cat:setSequence("left")
+               cat:play()
+                transition.to(cat, {time=100, x=(x-50)})
+            elseif (event.target.name == arrow[2].name) then 
+                 cat:setSequence("right")
+               cat:play()
+                 transition.to(cat,{time=100, x=(x + 50)})
+             elseif(event.target.name ==arrow[3].name) then
+                cat:setSequence("up")
+               cat:play()
+                transition.to(cat, {time=100, y=(y-50)})
+               else 
+                  cat:setSequence("down")
+               cat:play()
+                transition.to(cat, {time=100, y=(y+50)})
+             end
+         
+            end
+   
+   for i = 1,4  do
+      arrow[i]:addEventListener("tap", arrowTab)
+      sceneGroup:insert(arrow[i])
+   end
+   
+   -----타이머 코드
+   local time = display.newText(0, display.contentWidth*0.1, display.contentHeight*0.15)
+ 	time.size = 100
+
+ 	time:setFillColor(0)
+ 	time.alpha = 0.5
+
 
 end
 
