@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- soongin game.lua
+-- inmoon_game.lua
 --인문관 미니게임 씬
 -----------------------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ function scene:create( event )
 
 
 	-----------타이머--------------
-	local time = display.newText(15, display.contentWidth*0.9, display.contentHeight*0.15)
+	local time = display.newText(10, display.contentWidth*0.9, display.contentHeight*0.15)
 	time.size = 100
 	time:setFillColor(0)
 	time.alpha = 0.5
@@ -27,13 +27,22 @@ function scene:create( event )
 	local function counter(event )
 		time.text = time.text - 1
 
-		if(time.text == -1) then
-			time.alpha = 0
-			composer.gotoScene("inmoon_ending")
+		if(time.text == 0) then
+				composer.gotoScene("inmoon_ending")
+			end
 		end
 
-	end
+	---------점수-------------
+	local score = display.newText(10, display.contentWidth*0.1, display.contentHeight*0.15)
+	score.size = 100
+	score:setFillColor(0)
 
+	sceneGroup:insert(score)
+
+	local function scroeCal(event)
+		score.text = score.text - 1
+
+	end
 
 	-----------설명서---------------
 	local message = display.newImage("image/피하기설명서.png")
@@ -41,7 +50,7 @@ function scene:create( event )
 
 	local function tapEventListener(evnet)
 		message:removeSelf()
-		local timeAttack = timer.performWithDelay(1000, counter, 16) --설명서 누르면 시간 시작
+		local timeAttack = timer.performWithDelay(1000, counter, 10) --설명서 누르면 시간 시작
 	end
 
 	message:addEventListener("tap", tapEventListener) -- 설명서 누르면 사라짐
@@ -74,6 +83,7 @@ function scene:create( event )
 
 	arrow[3] = "right"
 
+
 	function arrowTab(event)
 		x = cat.x
 		y = cat.y
@@ -99,12 +109,10 @@ function scene:create( event )
 		arrow[i]:addEventListener("tap", arrowTab)
 		sceneGroup:insert(arrow[i])
 	end
-
-	--------F가 고양이에게 닿으면---------
+end
 
 
 	--------게임 종료 후------------
-end
 
 function scene:show( event )
 	local sceneGroup = self.view
