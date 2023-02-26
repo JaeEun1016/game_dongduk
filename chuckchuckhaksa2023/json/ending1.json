@@ -1,0 +1,23 @@
+[
+	
+	{ 
+		"background":"image/증명서 출력배경.jpg",
+		"certificate":"image/투명창.png",
+		"image0":"image/고양이앉은모습.png",
+		"image":"image/대화창_양갱.png",
+		"content":"엔딩1) 85점 이상 증명서출력1, 클릭시 배경전환가능,대사 양도 늘릴 수 있습니다."
+	},
+	{   "background":"image/게임임시배경.jpg",
+		"certificate":"image/투명창.png",
+		"image0":"image/고양이앉은모습.png",
+		"image":"image/대화창_양갱.png",
+		"content":"이런식으로 배경변경 가능 출력장면2,"
+	},
+	{ 	"background":"image/투명창.png",
+		"certificate":"image/수석증명서.png",
+		"image0":"image/투명창.png",
+		"image":"image/투명창.png",
+		"content":"투명창파일. 수석증명서 부분입니다."
+	}
+	
+]

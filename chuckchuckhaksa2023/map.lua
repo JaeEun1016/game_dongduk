@@ -34,8 +34,52 @@ function scene:create( event )
 	won:scale(1.2,1.2)
 	sceneGroup:insert(won)
 
-	--탭기능 
+	--게이지 
 
+	--데이터 parsing 
+	local GData = jsonParse("json/gauge.json")
+	if(GData) then 
+		print(GData.gauge_json)
+	end
+
+		--json 로드 (전역변수,게이지값) 
+	gauge = GData.gauge_json
+
+
+	--게이지바 
+	local gaugeBar
+		if (gauge == 0 )then 
+			gaugeBar=display.newImage("image/gauge/gauge0.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+		elseif(gauge == 1) then 
+			gaugeBar=display.newImage("image/gauge/gauge1.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+		elseif(gauge ==2 )then 
+			gaugeBar=display.newImage("image/gauge/gauge2.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+		elseif(gauge == 3 )then 
+			gaugeBar=display.newImage("image/gauge/gauge3.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+		elseif(gauge == 4 )then 
+			gaugeBar=display.newImage("image/gauge/gauge4.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+		elseif(gauge ==5) then
+			gaugeBar=display.newImage("image/gauge/gauge5.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+		elseif(gauge ==6) then
+			gaugeBar=display.newImage("image/gauge/gauge6.png")
+	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
+			sceneGroup:insert(gaugeBar)
+
+		end 
+
+-------탭기능 
 	--인문
 	 local function inmoonTap(event)
 			print("인문관탭")
@@ -79,7 +123,7 @@ function scene:create( event )
         composer.gotoScene("won",options)
     end
 	 won:addEventListener("tap",wonTap)
-
+----------
 	
 end
 
