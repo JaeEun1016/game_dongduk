@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- bon.lua
+-- game2.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -10,32 +10,45 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	--배경--
-	local bon = display.newImage("image/건물내부-01.png",1920,1080)
-	bon.x, bon.y = display.contentWidth*0.5, display.contentHeight*0.5
-	sceneGroup:insert(bon)
+	local graduation = display.newImage("image/bon/졸업퀴즈 배경.png", 1920, 1080)
+	graduation.x, graduation.y = display.contentWidth*0.5, display.contentHeight*0.5
+	sceneGroup:insert(graduation)
+	--퀴즈2번--
+	local quiz2 = display.newImage("image/bon/동덕축제이름퀴즈.png")
+	quiz2.x, quiz2.y = display.contentWidth*0.5, display.contentHeight*0.5
+	sceneGroup:insert(quiz2)
+	--퀴즈2번보기--
+	local an1 = display.newImage("image/bon/1대동제.png")
+	an1.x, an1.y = display.contentWidth*0.45, display.contentHeight*0.4
+    an1:scale(0.8,0.8)
+	sceneGroup:insert(an1)
+	local an2 = display.newImage("image/bon/2동덕페스티벌.png")
+	an2.x, an2.y = display.contentWidth*0.45, display.contentHeight*0.55
+    an2:scale(0.8,0.8)
+	sceneGroup:insert(an2)
 
+	local an3 = display.newImage("image/bon/3동동제.png")
+	an3.x, an3.y = display.contentWidth*0.45, display.contentHeight*0.7
+    an3:scale(0.8,0.8)
+	sceneGroup:insert(an3)
 
-	--임시 텍스트 
-	local showText = display.newText("본관내부",display.contentWidth*0.5,display.contentHeight*0.8)
-	showText:setFillColor(1)
-	showText.size=200
-	sceneGroup:insert(showText)
+    local an4 = display.newImage("image/bon/4솜솜제.png")
+	an4.x, an4.y = display.contentWidth*0.45, display.contentHeight*0.85
+    an4:scale(0.8,0.8)
+	sceneGroup:insert(an4)
 
-	--씬이동 
-	local function catch(event)
-
-        	composer.setVariable("complete", true)
-        local options={
-							effect ="fade",
-
-						}
-        composer.gotoScene("bon_project",options)
-
-    	end
-
-	  bon:addEventListener("tap",catch)
-
-	
+    local function quiz2Tap(event)
+        print("퀴즈2탭")
+    local options={
+                        effect ="fade",
+                        time=400
+                    }
+    composer.gotoScene("bon_game3",options)
+end
+ an1:addEventListener("tap",quiz2Tap)
+ an2:addEventListener("tap",quiz2Tap)
+ an3:addEventListener("tap",quiz2Tap)
+ an4:addEventListener("tap",quiz2Tap)
 end
 
 function scene:show( event )

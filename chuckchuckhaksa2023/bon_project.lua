@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- bon.lua
+-- project.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -10,32 +10,29 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	--배경--
-	local bon = display.newImage("image/건물내부-01.png",1920,1080)
-	bon.x, bon.y = display.contentWidth*0.5, display.contentHeight*0.5
-	sceneGroup:insert(bon)
+	local graduation = display.newImage("image/bon/졸업퀴즈 배경.png", 1920, 1080)
+	graduation.x, graduation.y = display.contentWidth*0.5, display.contentHeight*0.5
+	sceneGroup:insert(graduation)
 
-
-	--임시 텍스트 
-	local showText = display.newText("본관내부",display.contentWidth*0.5,display.contentHeight*0.8)
+	local showText = display.newText("졸업퀴즈게임씬",display.contentWidth*0.5,display.contentHeight*0.8)
 	showText:setFillColor(1)
 	showText.size=200
 	sceneGroup:insert(showText)
 
-	--씬이동 
-	local function catch(event)
-
-        	composer.setVariable("complete", true)
-        local options={
-							effect ="fade",
-
-						}
-        composer.gotoScene("bon_project",options)
-
-    	end
-
-	  bon:addEventListener("tap",catch)
-
+	local button = display.newImage("image/넘기기버튼.png", 1920, 1080)
+	button.x, button.y = display.contentWidth*0.87, display.contentHeight*0.8
+	button:scale(0.8,0.8)
+	sceneGroup:insert(button)
 	
+	local function quizTap(event)
+        print("퀴즈1탭")
+    local options={
+                        effect ="fade",
+                        time=400
+                    }
+    composer.gotoScene("bon_game1",options)
+end
+ button:addEventListener("tap",quizTap)
 end
 
 function scene:show( event )

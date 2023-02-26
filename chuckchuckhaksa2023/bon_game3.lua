@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------
 --
--- bon_game.lua
---본관 미니게임 씬
+-- game3.lua
+--
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
@@ -9,20 +9,44 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	--배경
-	local bonGm = display.newImage("image/게임임시배경.jpg",1920,1080)
-	bonGm.x, bonGm.y = display.contentWidth*0.5, display.contentHeight*0.5
-	sceneGroup:insert(bonGm)
+	--배경--
+	local graduation = display.newImage("image/bon/졸업퀴즈 배경.png", 1920, 1080)
+	graduation.x, graduation.y = display.contentWidth*0.5, display.contentHeight*0.5
+	sceneGroup:insert(graduation)
+	--퀴즈3번--
+	local quiz3 = display.newImage("image/bon/동덕교화퀴즈.png")
+	quiz3.x, quiz3.y = display.contentWidth*0.5, display.contentHeight*0.5
+	sceneGroup:insert(quiz3)
+	--퀴즈3번보기--
+	local ans1 = display.newImage("image/bon/1.무궁화.png")
+	ans1.x, ans1.y = display.contentWidth*0.45, display.contentHeight*0.4
+    ans1:scale(0.8,0.8)
+	sceneGroup:insert(ans1)
+	local ans2 = display.newImage("image/bon/2.벚꽃.png")
+	ans2.x, ans2.y = display.contentWidth*0.45, display.contentHeight*0.55
+    ans2:scale(0.8,0.8)
+	sceneGroup:insert(ans2)
+	local ans3 = display.newImage("image/bon/3.목화.png")
+	ans3.x, ans3.y = display.contentWidth*0.45, display.contentHeight*0.7
+    ans3:scale(0.8,0.8)
+	sceneGroup:insert(ans3)
+    local ans4 = display.newImage("image/bon/4.진달래.png")
+	ans4.x, ans4.y = display.contentWidth*0.45, display.contentHeight*0.85
+    ans4:scale(0.8,0.8)
+	sceneGroup:insert(ans4)
 
-	
-	--임시 텍스트 
-	local showText = display.newText("본관게임씬",display.contentWidth*0.5,display.contentHeight*0.8)
-	showText:setFillColor(1)
-	showText.size=200
-	sceneGroup:insert(showText)
-
-	
-
+    local function quiz3Tap(event)
+        print("퀴즈2탭")
+    local options={
+                    effect ="fade",
+                    time=400
+                    }
+    composer.gotoScene("bon",options)
+end
+    ans1:addEventListener("tap",quiz3Tap)
+    ans2:addEventListener("tap",quiz3Tap)
+    ans3:addEventListener("tap",quiz3Tap)
+	ans4:addEventListener("tap",quiz3Tap)
 end
 
 function scene:show( event )
