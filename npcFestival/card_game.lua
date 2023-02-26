@@ -29,7 +29,7 @@ function scene:create( event )
 	skipBu.x, skipBu.y = display.contentWidth*0.68, display.contentHeight*0.92
 	skipBu:scale(0.04,0.05)
 	
-	-- 오픈된 카드 cardOGroup
+
 	-- arr에 1~8까지 2번씩 랜덤하게 넣어라
 	local tbl = {1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8}
 	local function shuffle(tbl)
@@ -41,21 +41,7 @@ function scene:create( event )
 	end
 	local arr = shuffle(tbl)
 	
-	local cardOGroup = display.newGroup()
-	local cardOpen = {}
 
-	for i = 1,4 do
-		cardOpen[i] = {}
-		for j = 1,4 do
-			--local num = arr[i][j]
-			cardOpen[i][j] = display.newImage(cardOGroup, "image/card ("..arr[4*(i-1)+j]..").png")
-			cardOpen[i][j].index = arr[4*(i-1)+j]
-			cardOpen[i][j].x, cardOpen[i][j].y = display.contentWidth*0.13*i + 340, display.contentHeight*(0.15+(j-1)*0.23)
-			cardOpen[i][j]:scale(0.70,0.6)
-			cardOpen[i][j].alpha = 0
-			--cardOpen[i][j].isVisible = true
-		end
-	end
 
 	-- 뒤집힌 카드 cardBGroup 
 	local cardBGroup = display.newGroup(); 
@@ -64,16 +50,35 @@ function scene:create( event )
 		cardBack[i] = {}
 		for j = 1,4 do
 			cardBack[i][j] = display.newImage(cardBGroup, "image/뒤집힌카드.png")
+			cardBack[i][j].index = arr[4*(i-1)+j]
 			cardBack[i][j].x, cardBack[i][j].y = display.contentWidth*0.13*i + 340, display.contentHeight*(0.15+(j-1)*0.23)
 			cardBack[i][j]:scale(0.75,0.6)
 			cardBack[i][j].alpha = 0
 		end
 	end
 
+
+	-- 오픈된 카드 cardOGroup
+	local cardOGroup = display.newGroup()
+	local cardOpen = {}
+
+	for i = 1,4 do
+		cardOpen[i] = {}
+		for j = 1,4 do
+			cardOpen[i][j] = display.newImage(cardOGroup, "image/card ("..arr[4*(i-1)+j]..").png")
+			cardOpen[i][j].index = arr[4*(i-1)+j]
+			cardOpen[i][j].x, cardOpen[i][j].y = display.contentWidth*0.13*i + 340, display.contentHeight*(0.15+(j-1)*0.23)
+			cardOpen[i][j]:scale(0.75,0.6)
+			cardOpen[i][j].alpha = 0
+		end
+	end
+		
+
 	-- 게임화면으로 넘어가기 tapskip
 	local function tapskip(event)
 		cardex.alpha = 0
 		skipBu.alpha = 0
+		timer.performWithDelay(500, function() cardBGroup:toFront() end) -- 전체적으로 보이는 시간
 		for i = 1,4 do
 			for j = 1,4 do
 				cardBack[i][j].alpha = 1
@@ -82,6 +87,15 @@ function scene:create( event )
 		end 
 	end
 	skipBu:addEventListener("tap", tapskip)
+
+	-- 타이머
+	local count = 1
+	local function counter( event )
+		print(count..'초가 지났습니다')
+		count = count + 1
+	end
+
+	--local timeAttack = timer.performWithDelay(1000, counter, ) -- 0 또는 -1 은 무한 반복	 
 
 	-----------------------------------------------------------------------------------------
 	-- 카드 flip 기능 -----------------------------------------------------------------------
@@ -93,7 +107,8 @@ function scene:create( event )
 		local onComplete1
 
 		onComplete1 = function(self)
-				self.isVisible = not event.target.isVisible
+				--self.isVisible = not event.target.isVisible
+			self.alpha = 0 
 		end
 
 		transition.to(event.target, {xScale = 0.05, time = 150, onComplete = onComplete1, transition = easing.outCirc})
@@ -101,21 +116,67 @@ function scene:create( event )
 
 	-- Open 카드도 같이 rotation
 	local function rotation(event)
-	 	transition.to(event.target, {xScale = 0.75, time = 250, transition = easing.inCirc})
+	 	transition.to(event.target, {xScale = 0.75, time = 300, transition = easing.inCirc})
 	end
 
-	
-	for i = 1,4 do
-		for j = 1,4 do
-			cardBack[i][j]:addEventListener("tap", flip)
-			cardOpen[i][j]:addEventListener("tap", rotation)
+	local function removeORgoback(idx1, idx2)
+		if idx1 == idx2 then
+			for i =1, 4 do
+				for j = 1,4 do
+					if cardOpen[i][j].index == idx1 then
+						timer.performWithDelay(300, 
+						function() 
+							display.remove(cardOpen[i][j]) 
+							display.remove(cardBack[i][j])
+						end)
+					end
+				end
+			end
+		elseif idx1 ~= -1 and idx2 ~= -1 and idx1 ~= idx2 then
+			for i =1, 4 do
+				for j = 1,4 do
+						local onComplete1
+
+						onComplete1 = function(self)
+						self.alpha = 1 end
+						transition.to(cardBack[i][j], {xScale = 0.75, time = 300, onComplete = onComplete1, transition = easing.outCirc})
+				end
+			end
 		end
 	end
 
-	-- match true or not
-	local click1 = true
-	local function match(event)
-		local idx = event.target.index
+	local idx1 = -1
+	local idx2 = -1
+	local function getIndex(event)
+		if idx1 == -1 and idx2 == -1 then
+			idx1 = event.target.index
+		elseif idx1 ~= -1 and idx2 == -1 then 
+			idx2 = event.target.index
+		elseif idx1 ~= -1 and idx2 ~= -1 then
+			idx2 = -1
+			idx1 = event.target.index
+		end
+		print(idx1, idx2)
+		removeORgoback(idx1, idx2)
+	end
+
+
+	-- local function matchSys(idx1, idx2)
+	-- 	if idx1 == -1 or idx2 == -1 then
+	-- 		break
+	-- 	else 
+	-- 		if idx1 == idx2 then
+	-- 			display.remove(cardOpen.index == idx1)
+	-- 		end
+	-- 	end		
+	-- end
+
+	for i = 1,4 do
+		for j = 1,4 do
+			cardBack[i][j]:addEventListener("tap", flip)
+			cardOpen[i][j]:addEventListener("tap", getIndex)
+			cardOpen[i][j]:addEventListener("tap", rotation)
+		end
 	end
 
 
