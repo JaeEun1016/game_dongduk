@@ -15,6 +15,23 @@ function scene:create( event )
 	inmoonGm.x, inmoonGm.y = display.contentWidth*0.5, display.contentHeight*0.5
 	sceneGroup:insert(inmoonGm)
 
+	-----------타이머--------------
+	local time = display.newText(10, display.contentWidth*0.9, display.contentHeight*0.15)
+	time.size = 100
+	time:setFillColor(0)
+	time.alpha = 0.5
+
+	sceneGroup:insert(time)
+
+	local function counter(event)
+		time.text = time.text - 1
+
+		if(time.text == 0) then
+				composer.gotoScene("inmoon_ending")
+		end
+	end
+
+
 	-----------설명서---------------
 	local message = display.newImage("image/피하기설명서.png")
 	message.x, message.y = display.contentWidth*0.5, display.contentHeight*0.5
@@ -25,6 +42,8 @@ function scene:create( event )
 	end
 
 	message:addEventListener("tap", tapEventListener) -- 설명서 누르면 사라짐
+
+
 
 	-----------캐릭터 이미지-----------
 	local professor = display.newImage("image/교수캐릭터_화난모습.png")
@@ -52,33 +71,14 @@ function scene:create( event )
 		F[i] = display.newImage("image/F.png")
 		F[i].x, F[i].y = display.contentWidth*0.5, display.contentHeight*0.12
 		F[i]:scale(0.5, 0.5)
-	end
 
-	-----------타이머--------------
-	local time = display.newText(10, display.contentWidth*0.9, display.contentHeight*0.15)
-	time.size = 100
-	time:setFillColor(0)
-	time.alpha = 0.5
+		local num = math.random(10)
+   		local w,h = display.contentWidth*num*0.1, display.contentHeight
+   		transition.moveTo( F[i], { x=w, y=display.contentHeight*0.8, time=3000*i})
 
-	sceneGroup:insert(time)
-
-	local function counter(event)
-		time.text = time.text - 1
-
-		if(time.text == 1) then
-				composer.gotoScene("inmoon_ending")
-		end
-
-		----------F 날리기--------------
-   		for i=1, 5 do
-   				local num = math.random(10)
-   				local w,h = display.contentWidth*num*0.1, display.contentHeight
-   				transition.moveTo( F[i], { x=w, y=display.contentHeight*0.8, time=3000*i})
-
-   				if (cat.x == w) then
-   					score.text = score.text - 1
-   				end
-   		end
+   			if (cat.x == F[i].x) then
+   				score.text = score.text - 1
+   			end
 	end
 
 	----------- 움직이는 모션 -----------
