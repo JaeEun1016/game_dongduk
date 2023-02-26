@@ -24,19 +24,26 @@ function scene:create( event )
 	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.8
 	cat:scale(0.5, 0.5)
 
+	---------------------------
+	local t = display.newImage("image/time 바.png")
+	t.x, t.y = display.contentWidth*0.1, display.contentHeight*0.15
+	sceneGroup:insert(t)
+
+	local s = display.newImage("image/score 바.png")
+	s.x, s.y = display.contentWidth*0.1, display.contentHeight*0.25
+	sceneGroup:insert(s)
+
 	---------점수-------------
-	local score = display.newText(5, display.contentWidth*0.1, display.contentHeight*0.15)
-	score.size = 100
+	local score = display.newText(5, display.contentWidth*0.12, display.contentHeight*0.15)
+	score.size = 40
 	score:setFillColor(0)
-	score.alpha = 0.5
 
 	sceneGroup:insert(score)
 
 	-----------타이머--------------
-	local time = display.newText(15, display.contentWidth*0.9, display.contentHeight*0.15)
-	time.size = 100
+	local time = display.newText(15, display.contentWidth*0.12, display.contentHeight*0.25)
+	time.size = 40
 	time:setFillColor(0)
-	time.alpha = 0.5
 
 	sceneGroup:insert(time)
 
@@ -53,10 +60,6 @@ function scene:create( event )
 	local function counter(event)
 		time.text = time.text - 1
 
-		if(time.text == 0) then
-				composer.gotoScene("inmoon_ending")
-		end
-
 		for i=1, 5 do
 			local num = math.random(10)
    			local w,h = display.contentWidth*num*0.1, display.contentHeight
@@ -65,7 +68,13 @@ function scene:create( event )
    			if (cat.y == F[i].y and cat.x == F[i].x) then
    				score.text = score.text - 1
    			end
-	end
+		end
+
+		if(time.text == 0) then
+				composer.gotoScene("inmoon_ending")
+		end
+
+		print(time.text)
 	end
 
 		-----------설명서---------------
