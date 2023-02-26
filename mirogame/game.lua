@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view2.lua
+-- game.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -10,15 +10,29 @@ local scene = composer.newScene()
 function scene:create( event )
 	local sceneGroup = self.view
 	
-	local background = display.newImageRect("image/minigame_background.jpg", display.contentWidth, display.contentHeight)
+	local background = display.newImageRect("image/minigame_background.jpg",display.contentWidth,display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
-	local ab_miro = display.newImage("image/about_miro.png")
+	local ab_miro = display.newImage("image/about_miro.png",display.contentWidth,display.contentHeight)
  	ab_miro.x, ab_miro.y = display.contentWidth*0.5, display.contentHeight*0.5
 	
-	local button1 = display.newImage("image/button1.png")
+	local button1 = display.newImage("image/button_1.png",display.contentWidth,display.contentHeight)
  	button1.x, button1.y = display.contentWidth*0.9, display.contentHeight*0.9
+	sceneGroup:insert(button1)
 
+		--æ¿¿Ãµø 
+	local function catch(event)
+		
+        	composer.setVariable("complete", true)
+        local options={
+							effect ="fade",
+							
+						}
+        composer.gotoScene("game2",options)
+    
+    	end
+
+	  button1:addEventListener("tap",catch)
 
 end
 
