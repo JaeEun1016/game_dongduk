@@ -16,9 +16,75 @@ function scene:create( event )
 	local miro = display.newImage("image/miro.png",display.contentWidth,display.contentHeight)
  	miro.x, miro.y = display.contentWidth*0.5, display.contentHeight*0.5
 
-	local basic_cat = display.newImage("image/basic_cat.png",display.contentWidth,display.contentHeight)
- 	basic_cat.x, basic_cat.y = display.contentWidth*0.87, display.contentHeight*0.8
+	--상하좌우 이동
+	local arrow ={}
+	arrow[1] = display.newImage("image/arrow_left.jpg",display.contentWidth,display.contentHeight)
+	arrow[1].width = 120
+	arrow[1].height = 120
+ 	arrow[1].x, arrow[1].y = display.contentWidth*0.83, display.contentHeight*0.7
+	arrow[2] = display.newImage("image/arrow_right.jpg",display.contentWidth,display.contentHeight)
+	arrow[2].width = 120
+	arrow[2].height = 120
+ 	arrow[2].x, arrow[2].y = display.contentWidth*0.95, display.contentHeight*0.7
+	arrow[3] = display.newImage("image/arrow_up.jpg",display.contentWidth,display.contentHeight)
+	arrow[3].width = 120
+	arrow[3].height = 120
+ 	arrow[3].x, arrow[3].y = display.contentWidth*0.89, display.contentHeight*0.6
+	arrow[4] = display.newImage("image/arrow_down.jpg",display.contentWidth,display.contentHeight)
+	arrow[4].width = 120
+	arrow[4].height = 120
+ 	arrow[4].x, arrow[4].y = display.contentWidth*0.89, display.contentHeight*0.8
+
+	arrow[5] ="right" --방향정보
+	local cat_left = display.newImageRect("image/cat_left.png",display.contentWidth,display.contentHeight)
+	cat_left.width = 170
+	cat_left.height = 170
+ 	cat_left.x, cat_left.y = display.contentWidth*0.715, display.contentHeight*0.79
+
+
+	----
+
 	
+	player.x, player.y = background.x, background.y+200
+	player.name = "player"
+	
+	sceneGroup:insert(player)
+
+	function arrowTab( event )
+		x = player.x
+		y = player.y
+		
+			if (event.target.name == arrow[5]) then
+			    if (event.target.name == "left") then
+			       transition.to(player, {time=100, x=(x-50)})
+			     elseif (event.target.name == "up") then 
+			     	transition.to(player,{time=100, y=(y-50)})
+			    else
+			       transition.to(player, {time=100, x=(x+50)})
+			    end
+			 else
+			    arrow[5] = event.target.name
+			    player:scale(-1, 1)
+			   
+
+			    if (event.target.name == "left") then
+			       
+			       transition.to(player, {time=100, x=(x-50)})
+			    elseif(event.target.name =="up") then 
+			    	transition.to(player,{time=100,y=(y+50)})
+			    else
+			     
+			       transition.to(player, {time=100, x=(x+50)})
+			    end
+			    
+				end
+		end
+	
+
+	for i = 1, 2 do
+		arrow[i]:addEventListener("tap", arrowTab)
+		sceneGroup:insert(arrow[i])
+	end
 end
 
 function scene:show( event )
