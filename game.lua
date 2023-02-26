@@ -13,12 +13,28 @@ function scene:create( event )
 	local background = display.newImageRect("image/minigame_background.jpg",display.contentWidth,display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
-	local miro = display.newImage("image/miro.png",display.contentWidth,display.contentHeight)
- 	miro.x, miro.y = display.contentWidth*0.5, display.contentHeight*0.5
-
-	local basic_cat = display.newImage("image/basic_cat.png",display.contentWidth,display.contentHeight)
- 	basic_cat.x, basic_cat.y = display.contentWidth*0.87, display.contentHeight*0.8
+	local ab_miro = display.newImage("image/about_miro.png",display.contentWidth,display.contentHeight)
+ 	ab_miro.x, ab_miro.y = display.contentWidth*0.5, display.contentHeight*0.5
 	
+	local button1 = display.newImage("image/button_1.png",display.contentWidth,display.contentHeight)
+	button1:toFront()
+ 	button1.x, button1.y = display.contentWidth*0.9, display.contentHeight*0.9
+	sceneGroup:insert(button1)
+
+		--æ¿¿Ãµø 
+	local function catch(event)
+		
+        	composer.setVariable("complete", true)
+        local options={
+							effect ="fade",
+							
+						}
+        composer.gotoScene("game2",options)
+    
+    	end
+
+	  button1:addEventListener("tap",catch)
+
 end
 
 function scene:show( event )
