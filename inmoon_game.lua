@@ -65,7 +65,7 @@ function scene:create( event )
    			local w,h = display.contentWidth*num*0.1, display.contentHeight
    			transition.moveTo( F[i], { x=w, y=display.contentHeight*0.8, time=2000*i})
 
-   			if (cat.y == F[i].y and cat.x == F[i].x) then
+   			if(F[i].x > cat.x - 100 and F[i].x < cat.x + 100 and F[i].y > cat.y - 100 and F[i].y < cat.y + 100 ) then
    				score.text = score.text - 1
    			end
 		end
