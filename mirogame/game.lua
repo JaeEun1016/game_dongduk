@@ -9,16 +9,23 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+
 	local background = display.newImageRect("image/minigame_background.jpg",display.contentWidth,display.contentHeight)
  	background.x, background.y = display.contentWidth/2, display.contentHeight/2
 
 	local ab_miro = display.newImage("image/about_miro.png",display.contentWidth,display.contentHeight)
  	ab_miro.x, ab_miro.y = display.contentWidth*0.5, display.contentHeight*0.5
-	
-	local button1 = display.newImage("image/button_1.png",display.contentWidth,display.contentHeight)
+
+--	local button1 = display.newImage("image/button_1.png", 170, 170)
+--	button1.scale(0.4, 0.4)
+--	button1:toFront()
+-- 	button1.x, button1.y = 1800, 600
+--    sceneGroup:insert(button1)
+
+	local button1 = display.newImage("image/button_1.png",170, 170)
  	button1.x, button1.y = display.contentWidth*0.9, display.contentHeight*0.9
-	button1:toFront()
+	button1:scale(1,1)
+--	button1:toFront()
 	sceneGroup:insert(button1)
 
 		--æ¿¿Ãµø 
