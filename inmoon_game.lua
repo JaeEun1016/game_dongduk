@@ -15,36 +15,6 @@ function scene:create( event )
 	inmoonGm.x, inmoonGm.y = display.contentWidth*0.5, display.contentHeight*0.5
 	sceneGroup:insert(inmoonGm)
 
-	-----------타이머--------------
-	local time = display.newText(10, display.contentWidth*0.9, display.contentHeight*0.15)
-	time.size = 100
-	time:setFillColor(0)
-	time.alpha = 0.5
-
-	sceneGroup:insert(time)
-
-	local function counter(event)
-		time.text = time.text - 1
-
-		if(time.text == 0) then
-				composer.gotoScene("inmoon_ending")
-		end
-	end
-
-
-	-----------설명서---------------
-	local message = display.newImage("image/피하기설명서.png")
-	message.x, message.y = display.contentWidth*0.5, display.contentHeight*0.5
-
-	local function tapEventListener(event)
-		message:removeSelf()
-		local timeAttack = timer.performWithDelay(1000, counter, 10) --설명서 누르면 시간 시작
-	end
-
-	message:addEventListener("tap", tapEventListener) -- 설명서 누르면 사라짐
-
-
-
 	-----------캐릭터 이미지-----------
 	local professor = display.newImage("image/교수캐릭터_화난모습.png")
 	professor.x, professor.y = display.contentWidth*0.5, display.contentHeight*0.12
@@ -54,15 +24,21 @@ function scene:create( event )
 	cat.x, cat.y = display.contentWidth*0.5, display.contentHeight*0.8
 	cat:scale(0.5, 0.5)
 
-	message:toFront() -- 설명서를 제일 앞으로 
-
 	---------점수-------------
-	local score = display.newText(10, display.contentWidth*0.1, display.contentHeight*0.15)
+	local score = display.newText(5, display.contentWidth*0.1, display.contentHeight*0.15)
 	score.size = 100
 	score:setFillColor(0)
 	score.alpha = 0.5
 
 	sceneGroup:insert(score)
+
+	-----------타이머--------------
+	local time = display.newText(15, display.contentWidth*0.9, display.contentHeight*0.15)
+	time.size = 100
+	time:setFillColor(0)
+	time.alpha = 0.5
+
+	sceneGroup:insert(time)
 
 	---------------F----------
 	local F = {}
@@ -71,15 +47,39 @@ function scene:create( event )
 		F[i] = display.newImage("image/F.png")
 		F[i].x, F[i].y = display.contentWidth*0.5, display.contentHeight*0.12
 		F[i]:scale(0.5, 0.5)
+	end
 
-		local num = math.random(10)
-   		local w,h = display.contentWidth*num*0.1, display.contentHeight
-   		transition.moveTo( F[i], { x=w, y=display.contentHeight*0.8, time=3000*i})
+-----------------------------------------------
+	local function counter(event)
+		time.text = time.text - 1
 
-   			if (cat.x == F[i].x) then
+		if(time.text == 0) then
+				composer.gotoScene("inmoon_ending")
+		end
+
+		for i=1, 5 do
+			local num = math.random(10)
+   			local w,h = display.contentWidth*num*0.1, display.contentHeight
+   			transition.moveTo( F[i], { x=w, y=display.contentHeight*0.8, time=2000*i})
+
+   			if (cat.y == F[i].y and cat.x == F[i].x) then
    				score.text = score.text - 1
    			end
 	end
+	end
+
+		-----------설명서---------------
+	local message = display.newImage("image/피하기설명서.png")
+	message.x, message.y = display.contentWidth*0.5, display.contentHeight*0.5
+
+	local function tapEventListener(event)
+		message:removeSelf()
+		local timeAttack = timer.performWithDelay(1000, counter, 15) --설명서 누르면 시간 시작
+	end
+
+	message:addEventListener("tap", tapEventListener) -- 설명서 누르면 사라짐
+
+	message:toFront() -- 설명서를 제일 앞으로 
 
 	----------- 움직이는 모션 -----------
 	physics.start()
