@@ -17,6 +17,10 @@ function scene:create( event )
 	local quiz2 = display.newImage("image_quiz/동덕축제이름퀴즈.png")
 	quiz2.x, quiz2.y = display.contentWidth*0.5, display.contentHeight*0.5
 	sceneGroup:insert(quiz2)
+	--다시생각해보세요--
+	-- local bback = display.newImage("image/back.png")
+	--bback.x, bback.y = display.contenWidth*0.5, display.contentHeight*0.5
+	--sceneGroup:insert(bback)
 	--퀴즈2번보기--
 	local an1 = display.newImage("image_quiz/1대동제.png")
 	an1.x, an1.y = display.contentWidth*0.45, display.contentHeight*0.4
@@ -46,9 +50,15 @@ function scene:create( event )
     composer.gotoScene("game3",options)
 end
  an1:addEventListener("tap",quiz2Tap)
- an2:addEventListener("tap",quiz2Tap)
- an3:addEventListener("tap",quiz2Tap)
- an4:addEventListener("tap",quiz2Tap)
+
+ 	local function back1(event)
+		local score = display.newImage("image/back.png")
+		score.x, score.y = display.contentWidth*0.5, display.contentHeight*0.5
+		sceneGroup:insert(score)
+	end
+an2:addEventListener("tap",back1)
+an3:addEventListener("tap",back1)
+an4:addEventListener("tap",back1)
 end
 
 function scene:show( event )

@@ -28,19 +28,31 @@ function scene:create( event )
 	a3.x, a3.y = display.contentWidth*0.45, display.contentHeight*0.85
 	sceneGroup:insert(a3)
 	
-    --씬이동-
+    --정답 선택했을 시 씬이동-
+
+	
     local function quiz1Tap(event)
-        print("퀴즈1탭")
+        	print("퀴즈1탭")
+
     local options={
                         effect ="fade",
                         time=400
                     }
     composer.gotoScene("game2",options)
 end
+
  a1:addEventListener("tap",quiz1Tap)
- a2:addEventListener("tap",quiz1Tap)
- a3:addEventListener("tap",quiz1Tap)
+
+
+	local function back(event)
+		local score = display.newImage("image/back.png")
+		score.x, score.y = display.contentWidth*0.5, display.contentHeight*0.5
+		sceneGroup:insert(score)
+	end
+a2:addEventListener("tap",back)
+a3:addEventListener("tap",back)
 end
+
 
 function scene:show( event )
 	local sceneGroup = self.view
