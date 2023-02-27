@@ -1,0 +1,35 @@
+[
+	
+	{ 
+		"background":"image/하늘배경.png",
+		"image0":"image/일반졸업.png",
+		"image":"image/대화창_양갱.png",
+		"content":"엔딩2_1 일반졸업 진짜진짜최종엔딩 대사창 1, 대사로 게임의 양을 늘리기..."
+	},
+	{  "background":"image/하늘배경.png",
+		"image0":"image/일반졸업.png",
+		"image":"image/대화창_양갱.png",
+		"content":"엔딩2_1 진짜진짜최종엔딩 대사창 2"
+	},
+	{  "background":"image/하늘배경.png",
+		"image0":"image/일반졸업.png",
+		"image":"image/대화창_양갱.png",
+		"content":"엔딩2_1 진짜진짜최종엔딩 대사창 3"
+	},
+	{  "background":"image/하늘배경.png",
+		"image0":"image/일반졸업.png",
+		"image":"image/대화창_양갱.png",
+		"content":"엔딩2_1 진짜진짜최종엔딩 대사창 4"
+	},
+	{ 	"background":"image/하늘배경_학사모.png",
+		"image0":"image/일반졸업.png",
+		"image":"image/대화창_양갱.png",
+		"content":"나도 이제 척척학사야!"
+	},
+	{ 	"background":"image/하늘배경_학사모.png",
+		"image0":"image/투명창.png",
+		"image":"image/투명창.png",
+		"content":""
+	}
+	
+]

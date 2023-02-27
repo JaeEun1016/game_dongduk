@@ -9,10 +9,14 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
+	--음악 mapMusic = audio.loadSound("음악파일.mp3")
+
 	--배경
 	local mapBG = display.newImage("image/맵_건물이름표.png",1920,1080)
 	mapBG.x, mapBG.y = display.contentWidth*0.5, display.contentHeight*0.5
 	sceneGroup:insert(mapBG)
+
+
 	--인문관
 	local inmoon = display.newImage("image/인문관.png",1920,1080)
 	inmoon.x, inmoon.y = display.contentWidth*0.23, display.contentHeight*0.21
@@ -34,7 +38,8 @@ function scene:create( event )
 	won:scale(1.2,1.2)
 	sceneGroup:insert(won)
 
-	--게이지 
+	
+	--게이지
 
 	--데이터 parsing 
 	local GData = jsonParse("json/gauge.json")
@@ -79,6 +84,47 @@ function scene:create( event )
 
 		end 
 
+	--경고문구 
+	local contentimg = display.newImage("image/대화창_양갱.png",1300,300)
+	contentimg.x, contentimg.y = display.contentWidth*0.5, display.contentHeight*0.8
+	contentimg:scale(0.7,0.7)
+	contentimg.alpha=0
+	sceneGroup:insert(contentimg)
+
+	local warning = display.newText("다른 관을 깨지 않았을 때, 들어갈 수 없습니다.", display.contentWidth*0.5, display.contentHeight*0.82)
+		warning:setFillColor(0)
+		warning.size=30
+		warning.alpha=0
+		sceneGroup:insert(warning)
+	--경고메세지 타임어택 지우기 
+	local warningCount = 0
+	local function warningTimeAttack(event)
+		warningCount = warningCount +1
+		if(warningCount ==1) then 
+			contentimg.alpha=0
+			warning.alpha=0
+			warningCount = 0
+		end
+	end
+	--본관탭
+	local function bonTap(event)
+		if(gauge >=3 ) then
+			print("본관탭")
+        local options={
+							effect ="fade",
+							time=400
+						}
+        composer.gotoScene("bon",options)
+    	else 
+    		contentimg.alpha=1
+    		warning.alpha=1
+    		timeAttack= timer.performWithDelay(600, warningTimeAttack, 1)
+
+       end
+    end
+	 bon:addEventListener("tap",bonTap)
+
+
 -------탭기능 
 	--인문
 	 local function inmoonTap(event)
@@ -102,16 +148,7 @@ function scene:create( event )
     end
 	 soongin:addEventListener("tap",SoonginTap)
 
-	--본관
-	 local function bonTap(event)
-			print("본관탭")
-        local options={
-							effect ="fade",
-							time=400
-						}
-        composer.gotoScene("bon",options)
-    end
-	 bon:addEventListener("tap",bonTap)
+
 
 	--대학원
 	 local function wonTap(event)

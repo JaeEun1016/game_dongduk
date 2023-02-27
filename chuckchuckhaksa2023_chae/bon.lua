@@ -15,6 +15,7 @@ function scene:create( event )
 	bon.x, bon.y = display.contentWidth*0.5, display.contentHeight*0.5
 	sceneGroup:insert(bon)
 
+	
 
 	--상하좌우 이동
 	local arrow ={}
