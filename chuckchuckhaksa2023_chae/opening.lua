@@ -9,9 +9,15 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
+	--SOUND
+	local backgroundMusic = audio.loadSound( "audio/opening.mp3" )
+				audio.play( backgroundMusic,{ channel=0,loops=-1 })
+				audio.setVolume( 0.4  )
+
 	--배경
-	local StartBg = display.newImage("image/게임시작화면.png",1920,1080)
+	local StartBg = display.newImage("image/게임시작화면.jpg",1920,1080)
 	StartBg.x, StartBg.y = display.contentWidth*0.5, display.contentHeight*0.5
+	StartBg:scale(0.24,0.24)
 	sceneGroup:insert(StartBg)
 
 	local StartButton = display.newImage("image/시작하기버튼.png",1920,1080)
@@ -30,7 +36,8 @@ function scene:create( event )
 							
 						}
         composer.gotoScene("intro",options)
-    
+    		--local soundEffect = audio.loadSound( "audio/miro.mp3" )
+				audio.play( soundEffect)
     	end
 
 	  StartButton:addEventListener("tap",catch)

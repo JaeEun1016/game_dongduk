@@ -9,6 +9,7 @@ local scene = composer.newScene()
 	
 function scene:create( event )
 	local sceneGroup = self.view
+	audio.pause(backgroundMusic)
 	--배경
 	local inmoonBg = display.newImage("image/건물내부-01.png",1920,1080)
 	inmoonBg.x, inmoonBg.y = display.contentWidth*0.5, display.contentHeight*0.5

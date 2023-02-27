@@ -9,15 +9,31 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	--배경
-	local endingCredit = display.newImage("image/게임시작화면.png",1920,1080)
-	endingCredit.x, endingCredit.y = display.contentWidth*0.5, display.contentHeight*0.5
-	sceneGroup:insert(endingCredit)
+	
 	--임시 텍스트 
 	local showText = display.newText("엔딩크레딧부분입니다. \n이 부분 아직 파일이 없어서 \n임시로 시작화면으로 두었습니다.\n 1안)엔딩크레딧없이 다시 시작화면\n 2안)엔딩크레딧후 다시 시작화면",display.contentWidth*0.5,display.contentHeight*0.3)
-	showText:setFillColor(0)
+	showText:setFillColor(1)
 	showText.size=100
 	sceneGroup:insert(showText)
+
+	local shewTextButton = 	display.newText("재입학버튼(replay 버튼)",display.contentWidth*0.8,display.contentHeight*0.8)
+	showText:setFillColor(1)
+	showText.size=100
+	sceneGroup:insert(shewTextButton)
+
+	--씬이동 
+	local function catch(event)
+		
+        	composer.setVariable("complete", true)
+        local options={
+							effect ="fade",
+							
+						}
+        composer.gotoScene("opening",options)
+    
+    	end
+
+	  shewTextButton:addEventListener("tap",catch)
 
 
 	

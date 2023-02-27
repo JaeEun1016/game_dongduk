@@ -9,7 +9,9 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
-	--음악 mapMusic = audio.loadSound("음악파일.mp3")
+	--SOUND
+	
+
 
 	--배경
 	local mapBG = display.newImage("image/맵_건물이름표.png",1920,1080)
@@ -53,31 +55,31 @@ function scene:create( event )
 
 	--게이지바 
 	local gaugeBar
-		if (gauge == 0 )then 
+		if (gauge ==0 )then 
 			gaugeBar=display.newImage("image/gauge/gauge0.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
-		elseif(gauge == 1) then 
+		elseif(gauge == 15) then 
 			gaugeBar=display.newImage("image/gauge/gauge1.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
-		elseif(gauge ==2 )then 
+		elseif(gauge ==20 )then 
 			gaugeBar=display.newImage("image/gauge/gauge2.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
-		elseif(gauge == 3 )then 
+		elseif(gauge == 35 )then 
 			gaugeBar=display.newImage("image/gauge/gauge3.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
-		elseif(gauge == 4 )then 
+		elseif(gauge == 40 )then 
 			gaugeBar=display.newImage("image/gauge/gauge4.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
-		elseif(gauge ==5) then
+		elseif(gauge ==55) then
 			gaugeBar=display.newImage("image/gauge/gauge5.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
-		elseif(gauge ==6) then
+		elseif(gauge ==60) then
 			gaugeBar=display.newImage("image/gauge/gauge6.png")
 	 		gaugeBar.x, gaugeBar.y = display.contentWidth*0.5 , display.contentHeight*0.5
 			sceneGroup:insert(gaugeBar)
@@ -108,8 +110,11 @@ function scene:create( event )
 	end
 	--본관탭
 	local function bonTap(event)
-		if(gauge >=3 ) then
+		if(gauge >=45 ) then
 			print("본관탭")
+			--효과음
+			--local soundEffect = audio.loadSound( "audio/문여는소리.mp3" )
+			--	audio.play( soundEffect)
         local options={
 							effect ="fade",
 							time=400

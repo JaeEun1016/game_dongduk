@@ -3,7 +3,12 @@
 	{ 
 		"image0":"image/고양이앉은모습.png",
 		"image":"image/대화창_양갱.png",
-		"content":"아~ 드디어 수험생활 끝! 이제 나도 대학생이다~ 동덕여자대학교 축제 대동제도 꼭 가보고~"
+		"content":"아~ 드디어 수험생활 끝! 이제 나도 대학생이다~"
+	},
+	{ 
+		"image0":"image/고양이앉은모습.png",
+		"image":"image/대화창_양갱.png",
+		"content":" 동덕여자대학교 축제 대동제도 꼭 가보고~"
 	},
 	{ 
 		"image0":"image/고양이앉은모습.png",
@@ -13,22 +18,37 @@
 	{ 
 		"image0":"image/교수캐릭터.png",
 		"image":"image/대화창_교수.png",
-		"content":"대학생이라고 놀기만 하면 졸업 못합니다. 졸업 요건을 채워야해요 양갱학생."
-	},
-	{ 
-		"image0":"image/고양이앉은모습.png",
-		"image":"image/대화창_양갱.png",
-		"content":"네...??? 졸업요건이요...??? 등록금을 냈는데 그냥 졸업을 못한다고요??"
+		"content":"대학생이라고 놀기만 하면 졸업 못합니다."
 	},
 	{ 
 		"image0":"image/교수캐릭터.png",
 		"image":"image/대화창_교수.png",
-		"content":"네 그렇습니다. 서둘로 졸업 요건을 채우도록 하세요. 안 그러면 양갱 학생 학력은 계속 고졸 상태입니다."
+		"content":"졸업 요건을 채워야해요 양갱학생."
+	},
+	{ 
+		"image0":"image/고양이앉은모습.png",
+		"image":"image/대화창_양갱.png",
+		"content":"네...??? 졸업요건이요...???"
+	},
+	{ 
+		"image0":"image/고양이앉은모습.png",
+		"image":"image/대화창_양갱.png",
+		"content":"등록금을 냈는데 그냥 졸업을 할 수 없다고요??"
+	},
+	{ 
+		"image0":"image/교수캐릭터.png",
+		"image":"image/대화창_교수.png",
+		"content":"네 그렇습니다. 서둘러 졸업 요건을 채우도록 하세요."
+	},
+		{ 
+		"image0":"image/교수캐릭터.png",
+		"image":"image/대화창_교수.png",
+		"content":"안 그러면 양갱 학생 학력은 계속 고졸 상태입니다."
 	},
 	{ 
 		"image0":"image/좌절한표정.png",
 		"image":"image/대화창_양갱.png",
-		"content":"열심히 공부해서 대학교 왔는데 또 공부를 해야하다니...!"
+		"content":"열심히 공부해서 대학교에 왔는데 또 공부를 해야한다니...!"
 	},
 	{ 
 		"image0":"image/고양이앉은모습.png",

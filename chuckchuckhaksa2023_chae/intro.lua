@@ -9,6 +9,12 @@ local scene = composer.newScene()
 
 function scene:create( event )
 	local sceneGroup = self.view
+	audio.pause(openingMusic)
+	--SOUND
+	local backgroundMusic = audio.loadSound( "audio/background.mp3" )
+				audio.play( backgroundMusic,{ channel=0,loops=-1 })
+				audio.setVolume( 0.4  )
+
 	--배경
 	local openingbg = display.newImage("image/오프닝배경.png",1920,1080)
 	openingbg.x, openingbg.y = display.contentWidth*0.5, display.contentHeight*0.5
