@@ -17,12 +17,11 @@ function scene:create( event )
 	sceneGroup:insert(inmoonGm)
 
 
- 	local goMap = display.newText("맵으로 이동", display.contentWidth*0.4, display.contentHeight*0.7)
- 	goMap:setFillColor(0)
- 	goMap.size = 50
+ 	local goMap = display.newImage("image/맵으로 이동 버튼.png", display.contentWidth*0.4, display.contentHeight*0.7)
+ 	goMap.size = 200
 
  	local replay = display.newImage("image/다시하기버튼.png", display.contentWidth*0.6, display.contentHeight*0.7)
-	replay.size = 100
+	replay.size = 50
 
 	function goMap: tap( event )
 		composer.gotoScene('map')
@@ -37,6 +36,21 @@ function scene:create( event )
 
 	sceneGroup:insert(goMap)
 	sceneGroup:insert(replay)
+
+	if(composer.getVariable("score") == '5') then
+		local A = display.newImage("image/A+.png")
+		A.x, A.y = display.contentWidth*0.5, display.contentHeight*0.5
+		sceneGroup:insert(A)
+	elseif(composer.getVariable("score") == '4') then
+		local B = display.newImage("image/B.png")
+		B.x, B.y = display.contentWidth*0.5, display.contentHeight*0.5
+		sceneGroup:insert(B)
+	else
+		local F = display.newImage("image/F.png")
+		F.x, F.y = display.contentWidth*0.5, display.contentHeight*0.5
+		sceneGroup:insert(F)
+	end
+
 end
 
 function scene:show( event )

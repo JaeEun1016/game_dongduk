@@ -21,6 +21,7 @@ function scene:create( event )
 
    local togo = display.newImage("image/건물내부_화살표.png")
    togo.x, togo.y = display.contentWidth*0.5, display.contentHeight*0.25
+   sceneGroup:insert(togo)
 
     --상하좌우 이동
    local arrow ={}
@@ -57,6 +58,7 @@ function scene:create( event )
    local player = display.newSprite(imgSheet, sequencesData)
    player:scale(0.7,0.7)
    player.x,player.y=display.contentWidth*0.5, display.contentHeight*0.5
+   sceneGroup:insert(player)
 
    function arrowTab( event )
       x = player.x
