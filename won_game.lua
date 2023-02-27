@@ -35,7 +35,7 @@ function scene:create( event )
 	s.x, s.y = display.contentWidth*0.1, display.contentHeight*0.25
 	sceneGroup:insert(s)
 
-	local result = display.newText("결과보기", display.contentWidth*0.88, display.contentHeight*0.6)
+	local result = display.newText("결과 보기", display.contentWidth*0.88, display.contentHeight*0.6)
 	result:setFillColor(0)
 	result.size = 80
 	sceneGroup:insert(result)
@@ -83,9 +83,10 @@ function scene:create( event )
    				score.text = score.text - 1
    			end
 
+		composer.setVariable("score", score.text)
 
-		if(time.text == 0) then
-				composer.gotoScene("inmoon_ending")
+		if(time.text == '0') then
+				composer.gotoScene("won_ending")
 		end
 	end
 
@@ -175,6 +176,7 @@ function scene:hide( event )
 		-- e.g. stop timers, stop animation, unload sounds, etc.)
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
+		 composer.removeScene("won_game")
 	end
 	physics.pause()
 end
